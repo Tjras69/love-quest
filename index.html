@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#170d1c">
+<link rel="stylesheet" href="style.css">
+<title>Love Quest — A little journey for my MIMI</title>
+
+</head>
+<body>
+<main class="app">
+  <div class="glow"></div>
+  <div class="sparkles"></div>
+  <header>
+    <div class="brand">♡ Love Quest</div>
+    <div class="top-note">a tiny adventure, made with love from Tjras</div>
+  </header>
+  <div class="wrap">
+    <section class="hero" id="intro">
+      <div class="eyebrow">A little something for you mimi</div>
+      <div class="heart">♡</div>
+      <h1>Hey, <em>Fenohasina.</em></h1>
+      <p class="sub">I made you a little journey. No timers, no pressure — just a few tiny moments, a little fun, and something waiting at the end.</p>
+      <button class="btn primary" style="margin-top:26px" onclick="startQuest()">Begin our little quest <span aria-hidden="true">→</span></button>
+    </section>
+    <section class="panel hidden" id="quest">
+      <div class="progress-head"><span>YOUR LITTLE JOURNEY</span><span id="progressText">0 / 5 complete</span></div>
+      <div class="bar"><span id="progressBar"></span></div>
+      <div class="quest-count" id="count">CHAPTER 01 · First task</div>
+      <h2 id="title">Meditation</h2>
+      <p class="description" id="desc"></p>
+      <div class="challenge"><small>Your tiny mission</small><p id="task"></p></div>
+      <div class="actions">
+        <button class="btn primary" id="completeBtn" onclick="completeQuest()">I did it ♡</button>
+        <button class="btn secondary" onclick="hint()">Give me a hint</button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </section>
+    <section class="panel final hidden" id="final">
+      <div class="gift">🎁</div>
+      <div class="eyebrow" style="margin-top:15px">Quest completed</div>
+      <h2 style="text-align:center;font-size:38px;margin-top:12px">You are my favourite <em style="color:#c05a82">plot twist.</em></h2>
+      <p class="description">You made it to the end. But honestly, getting to love you is already the best gift.</p>
+      <div class="letter" id="letter">Mimi,
+
+If I could give you one thing, it would be the ability to see yourself through my eyes. You would understand how special you are, how much your smile means to me, and how grateful I am for every little moment we share.
+
+Thank you for being you. This little quest is just a small reminder that you are loved — today, tomorrow, and in all the ordinary moments in between.
+
+I choose you Fenohasina. Always. __Tjras__♡
+
+<span class="signature">Yours, with all my heart.</span></div>
+      <button class="btn primary" onclick="celebrate()">One more hug? ♡</button>
+    </section>
+    <div class="footer" id="footer">Made slowly, thoughtfully, and with lots of love.</div>
+    <div class="edit-note">A little corner of the internet, just for us.</div>
+  </div>
+  <div class="confetti" id="confetti"></div>
+</main>
+</body>
+<script src="script.js"></script>
+</html>
