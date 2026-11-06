@@ -1,63 +1,233 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#170d1c">
-<link rel="stylesheet" href="style.css">
-<title>Love Quest — A little journey for my MIMI</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Love Quest ❤️</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<main class="app">
-  <div class="glow"></div>
-  <div class="sparkles"></div>
-  <header>
-    <div class="brand">♡ Love Quest</div>
-    <div class="top-note">a tiny adventure, made with love from Tjras</div>
-  </header>
-  <div class="wrap">
-    <section class="hero" id="intro">
-      <div class="eyebrow">A little something for you mimi</div>
-      <div class="heart">♡</div>
-      <h1>Hey, <em>Fenohasina.</em></h1>
-      <p class="sub">I made you a little journey. No timers, no pressure — just a few tiny moments, a little fun, and something waiting at the end.</p>
-      <button class="btn primary" style="margin-top:26px" onclick="startQuest()">Begin our little quest <span aria-hidden="true">→</span></button>
-    </section>
-    <section class="panel hidden" id="quest">
-      <div class="progress-head"><span>YOUR LITTLE JOURNEY</span><span id="progressText">0 / 5 complete</span></div>
-      <div class="bar"><span id="progressBar"></span></div>
-      <div class="quest-count" id="count">CHAPTER 01 · First task</div>
-      <h2 id="title">Meditation</h2>
-      <p class="description" id="desc"></p>
-      <div class="challenge"><small>Your tiny mission</small><p id="task"></p></div>
-      <div class="actions">
-        <button class="btn primary" id="completeBtn" onclick="completeQuest()">I did it ♡</button>
-        <button class="btn secondary" onclick="hint()">Give me a hint</button>
-      </div>
-      <div class="dots" id="dots"></div>
-    </section>
-    <section class="panel final hidden" id="final">
-      <div class="gift">🎁</div>
-      <div class="eyebrow" style="margin-top:15px">Quest completed</div>
-      <h2 style="text-align:center;font-size:38px;margin-top:12px">You are my favourite <em style="color:#c05a82">plot twist.</em></h2>
-      <p class="description">You made it to the end. But honestly, getting to love you is already the best gift.</p>
-      <div class="letter" id="letter">Mimi,
 
-If I could give you one thing, it would be the ability to see yourself through my eyes. You would understand how special you are, how much your smile means to me, and how grateful I am for every little moment we share.
+    <main class="container">
 
-Thank you for being you. This little quest is just a small reminder that you are loved — today, tomorrow, and in all the ordinary moments in between.
+        <!-- HEADER -->
+        <header class="hero">
 
-I choose you Fenohasina. Always. __Tjras__♡
+            <div class="top-label">
+                <span>♡</span> A LITTLE QUEST FOR YOU
+            </div>
 
-<span class="signature">Yours, with all my heart.</span></div>
-      <button class="btn primary" onclick="celebrate()">One more hug? ♡</button>
-    </section>
-    <div class="footer" id="footer">Made slowly, thoughtfully, and with lots of love.</div>
-    <div class="edit-note">A little corner of the internet, just for us.</div>
-  </div>
-  <div class="confetti" id="confetti"></div>
-</main>
+            <h1>Hey, Mimi! <span>♥</span></h1>
+
+            <p class="subtitle">
+                A little progress every day, a little closer
+                to becoming the best version of yourself.
+            </p>
+
+            <div class="date" id="currentDate"></div>
+
+        </header>
+
+
+        <!-- PROGRESS -->
+        <section class="progress-section">
+
+            <div class="progress-heading">
+                <span>Your daily progress</span>
+                <strong id="progressText">0 / 4</strong>
+            </div>
+
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <p class="progress-message" id="progressMessage">
+                Every little step counts. You got this! ♡
+            </p>
+
+        </section>
+
+
+        <!-- DAILY QUESTS -->
+        <section class="quest-section">
+
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">YOUR DAILY MISSIONS</span>
+                    <h2>Today's Quest ✨</h2>
+                </div>
+
+                <span class="quest-count">04 TASKS</span>
+            </div>
+
+
+            <!-- TASK 1 -->
+            <article class="task-card">
+
+                <div class="task-icon meditation">🧘🏻‍♀️</div>
+
+                <div class="task-info">
+                    <h3>Meditation</h3>
+                    <p>Take a deep breath. Relax your mind and enjoy the moment.</p>
+                    <span class="task-time">5 - 10 minutes</span>
+                </div>
+
+                <label class="check-container">
+                    <input type="checkbox" class="task-check" data-task="meditation">
+                    <span class="custom-check"></span>
+                </label>
+
+            </article>
+
+
+            <!-- TASK 2 -->
+            <article class="task-card">
+
+                <div class="task-icon duolingo">🦉</div>
+
+                <div class="task-info">
+                    <h3>Duolingo</h3>
+                    <p>Learn something new and improve your English today.</p>
+                    <span class="task-time">Your daily lesson</span>
+                </div>
+
+                <label class="check-container">
+                    <input type="checkbox" class="task-check" data-task="duolingo">
+                    <span class="custom-check"></span>
+                </label>
+
+            </article>
+
+
+            <!-- TASK 3 -->
+            <article class="task-card">
+
+                <div class="task-icon correction">🎥</div>
+
+                <div class="task-info">
+                    <h3>Video Correction</h3>
+                    <p>Let's review yesterday's speaking and correct your mistakes.</p>
+                    <span class="task-time">Speaking practice</span>
+                </div>
+
+                <label class="check-container">
+                    <input type="checkbox" class="task-check" data-task="correction">
+                    <span class="custom-check"></span>
+                </label>
+
+            </article>
+
+
+            <!-- TASK 4 -->
+            <article class="task-card">
+
+                <div class="task-icon dream">✨</div>
+
+                <div class="task-info">
+                    <h3>A Video About Your Dream</h3>
+                    <p>Discover new ideas, get inspired and keep dreaming big.</p>
+                    <span class="task-time">Watch a new video</span>
+                </div>
+
+                <label class="check-container">
+                    <input type="checkbox" class="task-check" data-task="dream">
+                    <span class="custom-check"></span>
+                </label>
+
+            </article>
+
+        </section>
+
+
+        <!-- COMPLETION MESSAGE -->
+        <section class="completion" id="completion">
+
+            <div class="completion-heart">💗</div>
+
+            <h2>You did it, Mimi!</h2>
+
+            <p>
+                Four little missions completed.
+                I'm so proud of you. Keep growing, beautiful!
+            </p>
+
+        </section>
+
+
+        <!-- SPECIAL GIFT -->
+        <section class="gift-section">
+
+            <div class="gift-heading">
+                <span class="eyebrow">A LITTLE SOMETHING FOR YOU</span>
+                <h2>Your Special Gift ♡</h2>
+                <p>Because some moments deserve to be kept forever.</p>
+            </div>
+
+
+            <div class="gift-card">
+
+                <div class="photo-frame main-photo">
+                    <img src="assets/photo1.jpg" alt="Our special memory">
+                    <div class="photo-overlay">
+                        <span>Our little world ❤️</span>
+                    </div>
+                </div>
+
+                <div class="love-note">
+
+                    <span class="note-heart">♥</span>
+
+                    <h3>My favorite memory</h3>
+
+                    <p>
+                        Out of all the beautiful moments in life,
+                        I'm grateful that some of them are with you.
+                        I hope we keep creating memories together.
+                    </p>
+
+                    <span class="signature">With love, always ♡</span>
+
+                </div>
+
+
+                <div class="sweet-photo">
+
+                    <img src="assets/photo2.jpg" alt="A sweet photo for you">
+
+                    <div class="sweet-caption">
+                        <span>♡</span>
+                        <p>And here's another little reminder that you're special to me.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-heart">♥</div>
+
+            <p>Made with love, just for you.</p>
+
+            <span>One day at a time. One dream at a time.</span>
+
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
 </body>
-<script src="script.js"></script>
 </html>

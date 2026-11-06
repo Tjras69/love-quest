@@ -1,102 +1,140 @@
-const quests = [
-  {
-    chapter:'CHAPTER 01 · MEDITATION',
-    title:'MEDITATION',
-    desc:'This will help you stabilize your mood.',
-    task:'Take a calm place and close your eyes, try to focus on one sound for 5 minutes.',
-    hint:'Akipio ny maso de mihainoa feo iray de mifantoka amzay pendant 5 min.'
-  },
-  {
-    chapter:'CHAPTER 02 · RESPIRATION',
-    title:'Respiration',
-    desc:'Helps your brain while memorising.',
-    task:'Try to inhale for 4 sec and exhale for 8 sec. 😌',
-    hint:'Misintona rivotra 4sec de avotsitra pendant 8sec'
-  },
-  {
-    chapter:'CHAPTER 03 · DUOLINGO',
-    title:'Duolingo',
-    desc:'stay motivated to impro you english.',
-    task:'Try to use new words while speaking with me.',
-    hint:'Manaova Duolingo dia aveo mampiasa vocabulaire vaovao ref mispeak tsika.'
-  },
-  {
-    chapter:'CHAPTER 04 · DRINK WATER',
-    title:'Drink water',
-    desc:'It helps your body to cool down and helps your brain to avoid headache',
-    task:'Drink 0.5L of water , muuahhh',
-    hint:'Misotroa rano eoeo am 0.5L.'
-  },
-  {
-    chapter:'CHAPTER 05 · FEEDBACK',
-    title:'Feedback',
-    desc:'about your day in english.',
-    task:'Write your day and then read it then send it as a video to me so i can correct you , don\'t stress its okay to feel that. ',
-    hint:'Soraty en anglais ny journée anla androany de vakio de raiso video de alefaso aty.'
-  }
-];
 
-let current = 0;
-let done = 0;
+document.addEventListener("DOMContentLoaded", () => {
 
-function startQuest() {
-  document.getElementById('intro').classList.add('hidden');
-  document.getElementById('quest').classList.remove('hidden');
-  render();
-}
+    const checkboxes = document.querySelectorAll(".task-check");
 
-function render() {
-  const q = quests[current];
-  document.getElementById('count').textContent = q.chapter;
-  document.getElementById('title').textContent = q.title;
-  document.getElementById('desc').textContent = q.desc;
-  document.getElementById('task').textContent = q.task;
-  document.getElementById('progressText').textContent = done + ' / 5 complete';
-  document.getElementById('progressBar').style.width = (done / 5 * 100) + '%';
-  document.getElementById('dots').innerHTML = quests.map((_, i) =>
-    `<i class="${i === current ? 'active' : ''}"></i>`
-  ).join('');
-  document.getElementById('completeBtn').textContent =
-    current === 4 ? 'Unlock my surprise ♡' : 'I did it ♡';
-}
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+    const progressMessage = document.getElementById("progressMessage");
+    const completion = document.getElementById("completion");
+    const currentDate = document.getElementById("currentDate");
 
-function completeQuest() {
-  done = Math.max(done, current + 1);
-  if (current < 4) {
-    current++;
-    render();
-  } else {
-    document.getElementById('quest').classList.add('hidden');
-    document.getElementById('final').classList.remove('hidden');
-    document.getElementById('progressBar').style.width = '100%';
-    document.getElementById('footer').textContent =
-      'The end of the quest. The beginning of another lovely day. ♡';
-    celebrate();
-  }
-}
+    const totalTasks = checkboxes.length;
 
-function hint() {
-  const q = quests[current];
-  const task = document.getElementById('task');
-  task.textContent = q.hint;
-  task.style.color = '#c05a82';
-  setTimeout(() => {
-    task.textContent = q.task;
-    task.style.color = '';
-  }, 4500);
-}
+    // Display today's date
+    const today = new Date();
 
-function celebrate() {
-  const box = document.getElementById('confetti');
-  const bits = ['♡', '✦', '💗', '✧', '🌸'];
-  for (let i = 0; i < 42; i++) {
-    const s = document.createElement('span');
-    s.textContent = bits[Math.floor(Math.random() * bits.length)];
-    s.style.left = Math.random() * 100 + '%';
-    s.style.animationDelay = Math.random() * 1.2 + 's';
-    s.style.fontSize = (13 + Math.random() * 18) + 'px';
-    box.appendChild(s);
-    setTimeout(() => s.remove(), 5000);
-  }
-}
+    currentDate.textContent = today.toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric"
+    });
 
+
+    // Load saved progress
+    function loadProgress() {
+
+        checkboxes.forEach(checkbox => {
+
+            const task = checkbox.dataset.task;
+
+            const saved = localStorage.getItem("loveQuest_" + task);
+
+            checkbox.checked = saved === "true";
+
+            updateCard(checkbox);
+
+        });
+
+        updateProgress();
+    }
+
+
+    // Update task appearance
+    function updateCard(checkbox) {
+
+        const card = checkbox.closest(".task-card");
+
+        if (checkbox.checked) {
+            card.classList.add("completed");
+        } else {
+            card.classList.remove("completed");
+        }
+
+    }
+
+
+    // Update progress bar
+    function updateProgress() {
+
+        let completedTasks = 0;
+
+        checkboxes.forEach(checkbox => {
+
+            if (checkbox.checked) {
+                completedTasks++;
+            }
+
+        });
+
+        const percentage = (completedTasks / totalTasks) * 100;
+
+        progressFill.style.width = percentage + "%";
+
+        progressText.textContent =
+            completedTasks + " / " + totalTasks;
+
+        // Dynamic messages
+        if (completedTasks === 0) {
+
+            progressMessage.textContent =
+                "Every little step counts. You got this! ♡";
+
+        } else if (completedTasks === 1) {
+
+            progressMessage.textContent =
+                "Beautiful start! Keep going, Mimi! 🌸";
+
+        } else if (completedTasks === 2) {
+
+            progressMessage.textContent =
+                "Halfway there! You're doing amazing! 💗";
+
+        } else if (completedTasks === 3) {
+
+            progressMessage.textContent =
+                "Almost there! One last mission! ✨";
+
+        } else {
+
+            progressMessage.textContent =
+                "You completed everything! I'm so proud of you! ❤️";
+
+        }
+
+        // Show congratulations
+        if (completedTasks === totalTasks) {
+            completion.classList.add("show");
+        } else {
+            completion.classList.remove("show");
+        }
+
+    }
+
+
+    // Listen for task completion
+    checkboxes.forEach(checkbox => {
+
+        checkbox.addEventListener("change", () => {
+
+            const task = checkbox.dataset.task;
+
+            // Save progress
+            localStorage.setItem(
+                "loveQuest_" + task,
+                checkbox.checked
+            );
+
+            updateCard(checkbox);
+
+            updateProgress();
+
+        });
+
+    });
+
+
+    // Initialize
+    loadProgress();
+
+});
